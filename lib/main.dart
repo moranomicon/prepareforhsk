@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'screens/hsk_level.dart';
 
@@ -31,9 +31,39 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-        
+  bool _initialized = false;
+  bool _error = false;
+
+  // Define an async function to initialize FlutterFire
+  void initializeFlutterFire() async {
+    try {
+      // Wait for Firebase to initialize and set `_initialized` state to true
+      await Firebase.initializeApp();
+      setState(() {
+        _initialized = true;
+      });
+    } catch(e) {
+      // Set `_error` state to true if Firebase initialization fails
+      setState(() {
+        _error = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    initializeFlutterFire();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    if(_error) {
+      return Text('ERror@');
+    }
+    if (!_initialized) {
+      return CircularProgressIndicator();
+    }
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -44,11 +74,6 @@ class _MyHomePageState extends State<MyHomePage> {
             fit: BoxFit.cover,
           ),
         ),
-        // decoration: BoxDecoration(
-        //     gradient: LinearGradient(
-        //         begin: Alignment.topLeft,
-        //         end: Alignment.bottomRight,
-        //         colors: [Colors.green, Colors.lightGreen])),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

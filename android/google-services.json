@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "299201038102",
+    "firebase_url": "https://hskapp-a2846-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "hskapp-a2846",
+    "storage_bucket": "hskapp-a2846.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299201038102:android:1c157c6ce01d7f33fff237",
+        "android_client_info": {
+          "package_name": "com.kaiqian.prepareforhsk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299201038102-ni274p9l6kbc8vdg2qgdn58con4kaf6d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJUmmOu-vUMgjo55sD-JhGOIjFOy4CCqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299201038102-ni274p9l6kbc8vdg2qgdn58con4kaf6d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
