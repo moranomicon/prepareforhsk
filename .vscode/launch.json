@@ -5,18 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Flutter: Attach to Device",
-            "type": "dart",
-            "request": "attach"
-        },
-        {
-            "name": "Attach to Edge",
-            "port": 9222,
-            "request": "attach",
-            "type": "pwa-msedge",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
             "name": "hsk_quiz",
             "request": "launch",
             "type": "dart",

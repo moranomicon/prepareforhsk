@@ -1,8 +1,7 @@
-import 'dart:convert';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hsk_quiz/screens/level_screen.dart';
+import 'package:hsk_quiz/screens/stage.dart';
+import 'package:hsk_quiz/widgets/button.dart';
 
 class HSKLevelPage extends StatefulWidget {
   @override
@@ -10,13 +9,6 @@ class HSKLevelPage extends StatefulWidget {
 }
 
 class _HSKLevelPageState extends State<HSKLevelPage> {
-  Future<Map> getStages() async {
-    final String response =
-        await rootBundle.loadString('assets/questions/quiz.json');
-    final data = await json.decode(response);
-    return data['level'];
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,12 +17,12 @@ class _HSKLevelPageState extends State<HSKLevelPage> {
           image: DecorationImage(
             colorFilter: new ColorFilter.mode(
                 Colors.black.withOpacity(0.2), BlendMode.dstATop),
-            image: AssetImage('background.jpg'),
+            image: AssetImage('assets/images/background.jpg'),
             fit: BoxFit.cover,
           ),
         ),
-        child: FutureBuilder<Map<dynamic, dynamic>>(
-            future: getStages(),
+        child: StreamBuilder(
+            stream: FirebaseFirestore.instance.collection('levels').snapshots(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (!snapshot.hasData && snapshot.data == null) {
                 return Center(
@@ -41,23 +33,22 @@ class _HSKLevelPageState extends State<HSKLevelPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      for (var level in snapshot.data?.keys)
+                      for (var level in snapshot.data.docs)
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: OutlinedButton(
+                          child: DefaultButton(
                               onPressed: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => LevelPage(
-                                          stages:
-                                              snapshot.data[level.toString()])),
+                                          level: level.id.toString())),
                                 );
                               },
                               child: Text(
-                                level.toString(),
+                                level.id.toString().toUpperCase(),
                                 style: TextStyle(
-                                    fontSize: 18, color: Colors.black54),
+                                    fontSize: 18),
                               )),
                         ),
                     ],
