@@ -1,5 +1,9 @@
 # hsk_quiz
 
+Final Project for College.
+
+A Demo of Hangman-esque based learning with HSK 1 - 3 vocabularies.
+
 A new Flutter project.
 
 ## Getting Started
